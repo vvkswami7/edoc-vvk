@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Node {
+    char name[30];
+    struct Node *left, *right;
+};
+
+struct Node* create(char name[]) {
+    struct Node* newNode = malloc(sizeof(struct Node));
+    strcpy(newNode->name, name);
+    newNode->left = newNode->right = NULL;
+    return newNode;
+}
+
+struct Node* insert(struct Node* root, char name[]) {
+    if(root == NULL) return create(name);
+    if(strcmp(name, root->name) < 0)
+        root->left = insert(root->left, name);
+    else
+        root->right = insert(root->right, name);
+    return root;
+}
+
+void inorder(struct Node* root) {
+    if(root) {
+        inorder(root->left);
+        printf("%s ", root->name);
+        inorder(root->right);
+    }
+}
+
+int search(struct Node* root, char name[]) {
+    if(root == NULL) return 0;
+    if(strcmp(name, root->name) == 0) return 1;
+    if(strcmp(name, root->name) < 0)
+        return search(root->left, name);
+    else
+        return search(root->right, name);
+}
+
+int main() {
+    struct Node* root = NULL;
+    root = insert(root, "Ravi");
+    insert(root, "Amit");
+    insert(root, "Kiran");
+    insert(root, "Zara");
+
+    printf("Inorder: "); inorder(root);
+    printf("\nSearch name: ");
+    char name[30]; scanf("%s", name);
+    if(search(root, name)) printf("Found\n"); else printf("Not Found\n");
+    return 0;
+}

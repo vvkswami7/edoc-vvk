@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Student {
+    int roll;
+    char name[30];
+    float marks;
+};
+
+int main() {
+    struct Student s[10];
+    int n, i, ch, pos;
+    printf("Enter number of students: ");
+    scanf("%d", &n);
+
+    // Create
+    for(i = 0; i < n; i++) {
+        printf("\nEnter Roll, Name, Marks: ");
+        scanf("%d %s %f", &s[i].roll, s[i].name, &s[i].marks);
+    }
+
+    printf("\n1.Display\n2.Modify\n3.Search\nEnter choice: ");
+    scanf("%d", &ch);
+
+    if(ch == 1) { // Display
+        for(i = 0; i < n; i++)
+            printf("%d\t%s\t%.2f\n", s[i].roll, s[i].name, s[i].marks);
+    }
+    else if(ch == 2) { // Modify
+        printf("Enter roll to modify: ");
+        scanf("%d", &pos);
+        for(i = 0; i < n; i++) {
+            if(s[i].roll == pos) {
+                printf("Enter new name and marks: ");
+                scanf("%s %f", s[i].name, &s[i].marks);
+                break;
+            }
+        }
+    }
+    else if(ch == 3) { // Search
+        printf("Enter roll to search: ");
+        scanf("%d", &pos);
+        for(i = 0; i < n; i++)
+            if(s[i].roll == pos)
+                printf("%d\t%s\t%.2f\n", s[i].roll, s[i].name, s[i].marks);
+    }
+
+    return 0;
+}
