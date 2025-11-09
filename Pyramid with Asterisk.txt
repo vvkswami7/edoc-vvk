@@ -1,8 +1,24 @@
 #include <stdio.h>
-int main(){
-    for(int i=1;i<=4;i++){
-        for(int j=1;j<=i;j++) printf("* ");
+
+int main() {
+    int rows;
+    
+    printf("Enter number of rows: ");
+    scanf("%d", &rows);
+    
+    printf("\nPyramid Pattern:\n\n");
+    
+    for(int i = 1; i <= rows; i++) {
+        // Print spaces
+        for(int j = 1; j <= rows - i; j++) {
+            printf(" ");
+        }
+        // Print asterisks
+        for(int j = 1; j <= i; j++) {
+            printf("* ");
+        }
         printf("\n");
     }
+    
     return 0;
 }
